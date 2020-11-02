@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.js"></script>
+        <style>
+            .label {float: left; width: 150px; }
+            .infobox {width: 200px; }
+            .error { color: red; padding-left: 10px; }
+            .submit { margin-left: 10px; margin-top: 10px;} 
+        </style>
+    </head>
+
+    <body>
+        <form id="signup" method="post" action="">
+            <div>   
+                <span class="label">Enter a valid Email Address</span>
+                <input type="text" class="infobox"name="email" />
+                <span class="error"> 
+                    Invalid Email Address. Correct email address is the one
+                    that essentially has an @ sign and a . (period) after @ sign. It should not have any other
+                    special symbol except hyphen or underscore and must be terminated by any letter only
+                </span>
+                <input class="submit" type="submit" value="Click here to check">
+            </div>
+        </form> 
+
+        <script>
+            $(document).ready(function() {
+                $('.error').hide(); //menyembunyikan pesan error saat web pertama kali load
+                $('.submit').click(function(event) { //perintah agar menjalankan fungsi tertentu saat tombol submit diklik
+                    var data=$('.infobox').val(); //mendeklarasikan variabel "data" yang isinya dilihat berdasarkan isi yang diisikan user pada box
+                    if(valid_email(data)) { //mendeklarasikan "conditional statement", yang dimana akan mengeksekusi kode dalam kurung kurawal jika syarat yang ditetapkan bernilai true. if statement akan memanggil fungsi valid_email dan mengecek hasil yang dikeluarkan true atau false
+                        $('.error').hide(); //menyembunyikan pesan error
+                    }
+                    else { //kondisi dimana syarat dalam if statement bernilai false lalu mengeksekusi kode dalam kurung kuraawal
+                    $('.error').show(); //memunculkan pesan error
+                    event.preventDefault(); //mencegah tindakan default yang dimiliki event
+                    }
+                });
+            });
+
+            function valid_email(email) { //mendeklarasikan fungsi untuk memeriksa kesesuaian email yang diinput
+                var pattern= new RegExp(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]+$/); //algoritma untuk memeriksa email
+                return pattern.test(email); //menghentikan eksekusi fungsi dan mengeluarkan nilai dari hasil pemeriksaan
+            } 
+        </script>
+    </body>
+
+</html>
